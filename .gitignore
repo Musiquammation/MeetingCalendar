@@ -1,0 +1,5 @@
+draft/
+.env
+client/vite.config.ts
+client/node_modules
+node_modules
