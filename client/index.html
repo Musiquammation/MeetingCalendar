@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Scheduler</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Login/Register Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <h2 id="authTitle">Hoster Login</h2>
+            <form id="authForm">
+                <input type="email" id="authEmail" placeholder="Email" required>
+                <input type="password" id="authPassword" placeholder="Password" required>
+                <button type="submit" id="authSubmit">Login</button>
+                <p id="authToggle">Don't have an account? <span>Register</span></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Client Modal -->
+    <div id="addClientModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Add Client</h2>
+            <input type="text" id="clientSearch" placeholder="Search client by name">
+            <div id="clientSearchResults"></div>
+            <div class="separator">OR</div>
+            <input type="text" id="newClientName" placeholder="New client name">
+            <button id="createClientBtn">Create New Client</button>
+            <button id="closeAddClientModal">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Request Details Modal -->
+    <div id="requestModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Time Slot Requests</h2>
+            <div id="requestsList"></div>
+            <button id="closeRequestModal">Close</button>
+        </div>
+    </div>
+
+    <!-- Create Availability Modal -->
+    <div id="createAvailabilityModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Create Availability</h2>
+            <p id="selectedTimeRange"></p>
+            <button id="confirmCreateAvailability">Create</button>
+            <button id="closeCreateAvailabilityModal">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Client Request Modal -->
+    <div id="clientRequestModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Request Time Slot</h2>
+            <p id="clientSelectedTimeRange"></p>
+            <label>Preference (1-5):
+                <input type="number" id="requestPreference" min="1" max="5" value="3">
+            </label>
+            <button id="confirmClientRequest">Submit Request</button>
+            <button id="closeClientRequestModal">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app" class="hidden">
+        <header>
+            <h1>Meeting Scheduler</h1>
+            <div id="userInfo"></div>
+            <button id="logoutBtn" class="hidden">Logout</button>
+            <button id="addClientBtn" class="hidden">Add Client</button>
+        </header>
+
+        <nav id="viewTabs" class="hidden">
+            <button class="tab active" data-view="calendar">Calendar</button>
+            <button class="tab" data-view="requests">My Requests</button>
+            <button class="tab" data-view="appointments">Appointments</button>
+            <button class="tab" data-view="clients">Clients</button>
+        </nav>
+
+        <main>
+            <!-- Calendar View -->
+            <div id="calendarView" class="view">
+                <div class="calendar-controls">
+                    <button id="prevWeek">&lt;</button>
+                    <span id="currentWeek"></span>
+                    <button id="nextWeek">&gt;</button>
+                    <button id="todayBtn">Today</button>
+                </div>
+                <div id="calendar"></div>
+            </div>
+
+            <!-- Requests View -->
+            <div id="requestsView" class="view hidden">
+                <h2>My Requests</h2>
+                <div id="myRequestsList"></div>
+            </div>
+
+            <!-- Appointments View -->
+            <div id="appointmentsView" class="view hidden">
+                <h2>Appointments</h2>
+                <div id="appointmentsList"></div>
+            </div>
+
+            <!-- Clients View -->
+            <div id="clientsView" class="view hidden">
+                <h2>My Clients</h2>
+                <div id="clientsList"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/calendar.js"></script>
+    <script src="js/hoster.js"></script>
+    <script src="js/client.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
