@@ -43,7 +43,7 @@ function renderCalendar() {
     const grid = document.createElement('div');
     grid.className = 'calendar-grid';
     grid.style.gridTemplateColumns = '80px repeat(7, 1fr)';
-    grid.style.gridTemplateRows = `50px repeat(${timeSlots.length}, 40px)`;
+    grid.style.gridTemplateRows = `50px repeat(${timeSlots.length}, 25px)`;
     
     // Header row
     const headerDiv = document.createElement('div');
@@ -75,8 +75,7 @@ function renderCalendar() {
         for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
             const date = new Date(state.currentWeekStart);
             date.setDate(date.getDate() + dayIndex);
-            date.setHours(slot.hour);
-            date.setMinutes(slot.minute);
+            date.setHours(slot.hour, slot.minute, 0, 0);
             
             const cell = document.createElement('div');
             cell.className = 'calendar-cell';
@@ -330,6 +329,25 @@ function renderClientEvents() {
 }
 
 function startClientSelection(timeslot) {
-    // Similar to hoster selection but for client
-    alert('Click and drag on the calendar to select your preferred time within this availability block');
+    clientSelectionTimeslot = timeslot;
+    
+    // Clear any previous selection state
+    state.isSelecting = false;
+    state.selectedCells.forEach(cell => cell.classList.remove('selecting'));
+    state.selectedCells = [];
+    
+    // Highlight available cells within the timeslot
+    const timeslotStart = new Date(timeslot.start_time);
+    const timeslotEnd = new Date(timeslot.end_time);
+    
+    const cells = document.querySelectorAll('.calendar-cell');
+    cells.forEach(cell => {
+        const cellTime = new Date(cell.dataset.datetime);
+        
+        if (cellTime >= timeslotStart && cellTime < timeslotEnd) {
+            cell.style.outline = '2px solid #007bff';
+        }
+    });
+    
+    alert('You can now select your preferred time by clicking and dragging on the highlighted cells');
 }
